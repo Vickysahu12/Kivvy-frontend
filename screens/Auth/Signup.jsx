@@ -84,7 +84,9 @@ const SignupFormScreen = ({ navigation }) => {
         </View>
 
         {/* Register Button */}
-        <TouchableOpacity style={styles.registerButton}>
+        <TouchableOpacity
+        onPress={() => navigation.navigate('OtpScreen')}
+        style={styles.registerButton}>
           <Text style={styles.registerButtonText}>REGISTER</Text>
         </TouchableOpacity>
 
