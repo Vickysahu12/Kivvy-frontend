@@ -12,6 +12,7 @@ import Signup from '../screens/Auth/Signup'
 import Login from '../screens/Auth/Login'
 import Dashboard from '../screens/Home/Dashboard'
 import OtpScreen from '../screens/Auth/OtpScreen'
+import IntroductionScreen from '../screens/Home/introduction'
 
 const Stack = createStackNavigator()
 
@@ -53,6 +54,11 @@ export default function AppNavigator() {
             <Stack.Screen
             name='Dashboard'
             component={Dashboard}
+            options={{headerShown:false}}
+            />
+            <Stack.Screen
+            name='introduction'
+            component={IntroductionScreen}
             options={{headerShown:false}}
             />
         </Stack.Navigator>

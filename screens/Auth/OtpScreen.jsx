@@ -23,16 +23,22 @@ const keypadLayout = [
 const OtpScreen = ({ navigation }) => {
   const [otp, setOtp] = useState('');
 
-  const handleKeypadInput = (key) => {
-    if (key === 'delete') {
-      setOtp((prevOtp) => prevOtp.slice(0, -1));
-    } else if (key === 'send') {
-      console.log('Verifying OTP:', otp);
-      // TODO: Add OTP verification API call
-    } else if (otp.length < otpLength && key.match(/[0-9]/)) {
-      setOtp((prevOtp) => prevOtp + key);
+ const handleKeypadInput = (key) => {
+  if (key === 'delete') {
+    setOtp((prevOtp) => prevOtp.slice(0, -1));
+  } else if (key === 'send') {
+    console.log('Verifying OTP:', otp);
+    if (otp.length === otpLength) {
+      // TODO: yaha real OTP verify API call kare
+      navigation.navigate('introduction'); // ✅ Dashboard pe redirect
+    } else {
+      alert('Please enter complete OTP');
     }
-  };
+  } else if (otp.length < otpLength && key.match(/[0-9]/)) {
+    setOtp((prevOtp) => prevOtp + key);
+  }
+};
+
 
   return (
     <SafeAreaView style={styles.container}>
