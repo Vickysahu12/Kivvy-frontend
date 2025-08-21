@@ -19,36 +19,36 @@ const SignupFormScreen = ({ navigation }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleSignup = async () => {
-    if (!username || !email || !password || !confirmPassword) {
-      Alert.alert('Error', 'Please fill all fields');
-      return;
-    }
-    if (password !== confirmPassword) {
-      Alert.alert('Error', 'Passwords do not match');
-      return;
-    }
+  // const handleSignup = async () => {
+  //   if (!username || !email || !password || !confirmPassword) {
+  //     Alert.alert('Error', 'Please fill all fields');
+  //     return;
+  //   }
+  //   if (password !== confirmPassword) {
+  //     Alert.alert('Error', 'Passwords do not match');
+  //     return;
+  //   }
 
-    setLoading(true);
-    try {
-      const res = await API.post('/api/auth/signup', {
-        username,
-        email,
-        password
-      });
+  //   setLoading(true);
+  //   try {
+  //     const res = await API.post('/api/auth/signup', {
+  //       username,
+  //       email,
+  //       password
+  //     });
 
-      Alert.alert('Success', res.data.message || 'Signup successful!');
+  //     Alert.alert('Success', res.data.message || 'Signup successful!');
       navigation.navigate('OtpScreen', { email });
-    } catch (err) {
-      console.error('Signup error:', err.message);
-      Alert.alert(
-        'Signup Failed',
-        err.response?.data?.detail || err.message || 'Something went wrong'
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+  //   } catch (err) {
+  //     console.error('Signup error:', err.message);
+  //     Alert.alert(
+  //       'Signup Failed',
+  //       err.response?.data?.detail || err.message || 'Something went wrong'
+  //     );
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -115,7 +115,7 @@ const SignupFormScreen = ({ navigation }) => {
         </View>
 
         <TouchableOpacity
-          onPress={handleSignup}
+          //onPress={handleSignup}
           style={[styles.registerButton, loading && { opacity: 0.6 }]}
           disabled={loading}
         >

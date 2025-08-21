@@ -26,7 +26,7 @@ const COLORS = {
   shadow: 'rgba(0,0,0,0.1)',
 };
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window'); // Height bhi add kiya
 
 const profileData = {
   name: 'Misty',
@@ -74,7 +74,13 @@ export default function Dashboard({ navigation }) {
     <TouchableOpacity
       activeOpacity={0.8}
       style={[styles.todoCard, { backgroundColor: item.backgroundColor }]}
-      onPress={() => console.log(`Clicked on ${item.title}`)}
+      onPress={() => {
+        if (item.id === '1') {
+          navigation.navigate('StoryScreen', { title: item.title });
+        } else {
+          console.log(`Clicked on ${item.title}, but no navigation set up yet.`);
+        }
+      }}
     >
       <View style={styles.todoCardContent}>
         <Text style={styles.todoCardTitle}>{item.title}</Text>
@@ -85,7 +91,7 @@ export default function Dashboard({ navigation }) {
       </View>
       <Image source={item.image} style={styles.todoCardImage} />
     </TouchableOpacity>
-  ), []);
+  ), [navigation]);
 
   const Header = () => (
     <>
@@ -132,7 +138,8 @@ export default function Dashboard({ navigation }) {
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={Header}
-        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 20 }}
+        // yahan paddingBottom badhaya hai taaki content bottom bar ke neeche na chhipe
+        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 100 }}
       />
     </SafeAreaView>
   );
@@ -173,3 +180,4 @@ const styles = StyleSheet.create({
   watchMoreButtonText: { color: COLORS.white, fontSize: 14, fontWeight: 'bold' },
   todoCardImage: { width: 100, height: 100, borderRadius: 10 },
 });
+

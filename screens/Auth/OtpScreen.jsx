@@ -30,7 +30,7 @@ const OtpScreen = ({ navigation }) => {
     console.log('Verifying OTP:', otp);
     if (otp.length === otpLength) {
       // TODO: yaha real OTP verify API call kare
-      navigation.navigate('introduction'); // ✅ Dashboard pe redirect
+      navigation.navigate('BottomNavigator'); // ✅ Dashboard pe redirect
     } else {
       alert('Please enter complete OTP');
     }
