@@ -13,13 +13,10 @@ import parents from "../assets/icon/parents.png";
 // Screens
 import Dashboard from "../screens/Home/Dashboard";
 import ChatbotScreen from "../screens/chatbot/ChatBot";
+import DrawingScreen from "../screens/Drawing/DrawingScreen";
 
 // Placeholder Screens
-const DrawingScreen = () => (
-  <View style={styles.container}>
-    <Text style={styles.text}>Drawing Screen</Text>
-  </View>
-);
+
 const ParentsScreen = () => (
   <View style={styles.container}>
     <Text style={styles.text}>Parent Dashboard</Text>
@@ -79,7 +76,13 @@ const BottomNavigator = () => {
       })}
     >
       <Tab.Screen name="Home" component={Dashboard} />
-      <Tab.Screen name="Drawing" component={DrawingScreen} />
+      <Tab.Screen
+       name="Drawing" 
+       component={DrawingScreen}
+       options={{
+        tabBarStyle:{display:"none"}
+       }}
+       />
 
       {/* 👇 Ye hai trick: ChatbotScreen pe Tabbar hide ho jayega */}
       <Tab.Screen
