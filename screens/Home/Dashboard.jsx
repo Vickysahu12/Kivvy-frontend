@@ -26,7 +26,7 @@ const COLORS = {
   shadow: 'rgba(0,0,0,0.1)',
 };
 
-const { width, height } = Dimensions.get('window'); // Height bhi add kiya
+const { width } = Dimensions.get('window');
 
 const profileData = {
   name: 'Misty',
@@ -77,8 +77,8 @@ export default function Dashboard({ navigation }) {
       onPress={() => {
         if (item.id === '1') {
           navigation.navigate('StoryScreen', { title: item.title });
-        } else {
-          console.log(`Clicked on ${item.title}, but no navigation set up yet.`);
+        } else if(item.id === "2") {
+          navigation.navigate('Drawing',{title:item.title});
         }
       }}
     >
@@ -94,7 +94,7 @@ export default function Dashboard({ navigation }) {
   ), [navigation]);
 
   const Header = () => (
-    <>
+    <View style={styles.headerWrapper}>
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.profileInfo}>
@@ -126,7 +126,7 @@ export default function Dashboard({ navigation }) {
       <View style={styles.sectionContainer}>
         <Text style={styles.sectionTitle}>Aaj ka To-Do</Text>
       </View>
-    </>
+    </View>
   );
 
   return (
@@ -138,7 +138,7 @@ export default function Dashboard({ navigation }) {
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={Header}
-        // yahan paddingBottom badhaya hai taaki content bottom bar ke neeche na chhipe
+        stickyHeaderIndices={[0]}   // 👈 Sticky bana diya header
         contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 100 }}
       />
     </SafeAreaView>
@@ -147,6 +147,7 @@ export default function Dashboard({ navigation }) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: COLORS.secondary },
+  headerWrapper: { backgroundColor: COLORS.secondary }, // sticky ke liye background fix
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginVertical: 20, marginTop: 50 },
   profileInfo: { flexDirection: 'row', alignItems: 'center' },
   profilePic: { width: 50, height: 50, borderRadius: 25, borderWidth: 2, borderColor: COLORS.white, marginRight: 15 },
@@ -180,4 +181,3 @@ const styles = StyleSheet.create({
   watchMoreButtonText: { color: COLORS.white, fontSize: 14, fontWeight: 'bold' },
   todoCardImage: { width: 100, height: 100, borderRadius: 10 },
 });
-

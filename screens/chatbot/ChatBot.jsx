@@ -40,7 +40,7 @@ const ChatbotScreen = () => {
       setTimeout(() => {
         setMessages((prev) => [
           ...prev,
-          { text: "Yay! That's so cool 😃✨", sender: "bot" },
+          { text: "Yay! How are you cutuu 😃✨", sender: "bot" },
         ]);
       }, 800);
     }
