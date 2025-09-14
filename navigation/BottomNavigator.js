@@ -162,3 +162,5 @@ const styles = StyleSheet.create({
 });
 
 export default BottomNavigator;
+
+ // Lets begin this journey again launch on november 11
