@@ -1,5 +1,11 @@
 import React, { useRef, useEffect } from "react";
-import { StyleSheet, View, Image, Animated, Platform } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Animated,
+  TouchableOpacity,
+} from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -19,76 +25,35 @@ const Tab = createBottomTabNavigator();
 
 const COLORS = {
   primary: "#F6BD60",
-  text: "#333",
   light: "#aaa",
 };
 
-const AnimatedIcon = ({ focused, source }) => {
-  const scaleAnim = useRef(new Animated.Value(1)).current;
-  const rotateAnim = useRef(new Animated.Value(0)).current;
+const TabIcon = ({ focused, source }) => {
+  const scale = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
-    if (focused) {
-      Animated.parallel([
-        Animated.sequence([
-          Animated.timing(scaleAnim, {
-            toValue: 1.3,
-            duration: 150,
-            useNativeDriver: true,
-          }),
-          Animated.timing(scaleAnim, {
-            toValue: 1,
-            duration: 150,
-            useNativeDriver: true,
-          }),
-        ]),
-        Animated.sequence([
-          Animated.timing(rotateAnim, {
-            toValue: 1,
-            duration: 100,
-            useNativeDriver: true,
-          }),
-          Animated.timing(rotateAnim, {
-            toValue: -1,
-            duration: 100,
-            useNativeDriver: true,
-          }),
-          Animated.timing(rotateAnim, {
-            toValue: 0,
-            duration: 100,
-            useNativeDriver: true,
-          }),
-        ]),
-      ]).start();
-    }
+    Animated.spring(scale, {
+      toValue: focused ? 1.2 : 1,
+      useNativeDriver: true,
+      friction: 4,
+    }).start();
   }, [focused]);
 
-  const spin = rotateAnim.interpolate({
-    inputRange: [-1, 1],
-    outputRange: ["-15deg", "15deg"],
-  });
-
   return (
-    <Animated.View
-      style={{
-        transform: [{ scale: scaleAnim }, { rotate: spin }],
-        alignItems: "center",
-      }}
-    >
+    <Animated.View style={{ transform: [{ scale }] }}>
       <Image
         source={source}
         style={{
-          width: 30,
-          height: 30,
-          tintColor: focused ? COLORS.primary : COLORS.light,
+          width: 26,
+          height: 26,
+          resizeMode: "contain",
         }}
       />
-      {focused && <View style={styles.indicator} />}
     </Animated.View>
   );
 };
 
-const BottomNavigator = () => {
+export default function BottomNavigator() {
   const insets = useSafeAreaInsets();
 
   return (
@@ -96,71 +61,52 @@ const BottomNavigator = () => {
       initialRouteName="Home"
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
+        tabBarActiveTintColor: COLORS.primary,
+        tabBarInactiveTintColor: COLORS.light,
         tabBarStyle: [
           styles.tabBar,
           {
-            height: 55 + insets.bottom,
-            paddingBottom: insets.bottom > 0 ? insets.bottom : 10,
+            height: 60 + insets.bottom,
+            paddingBottom: insets.bottom > 0 ? insets.bottom : 8,
           },
         ],
+        // 👇 remove default black ripple
+        tabBarButton: (props) => (
+          <TouchableOpacity
+            {...props}
+            activeOpacity={1} // no opacity/ripple change
+            style={[props.style, { backgroundColor: "transparent" }]}
+          />
+        ),
         tabBarIcon: ({ focused }) => {
           let iconSource;
+          if (route.name === "Home") iconSource = home;
+          else if (route.name === "Drawing") iconSource = colorpalette;
+          else if (route.name === "Chat") iconSource = robot;
+          else if (route.name === "Parents") iconSource = parents;
 
-          if (route.name === "Home") {
-            iconSource = home;
-          } else if (route.name === "Drawing") {
-            iconSource = colorpalette;
-          } else if (route.name === "Chat") {
-            iconSource = robot;
-          } else if (route.name === "Parents") {
-            iconSource = parents;
-          }
-
-          return <AnimatedIcon focused={focused} source={iconSource} />;
+          return <TabIcon focused={focused} source={iconSource} />;
         },
       })}
     >
       <Tab.Screen name="Home" component={Dashboard} />
-      <Tab.Screen
-        name="Drawing"
-        component={DrawingScreen}
-        options={{ tabBarStyle: { display: "none" } }}
-      />
-      <Tab.Screen
-        name="Chat"
-        component={ChatbotScreen}
-        options={{ tabBarStyle: { display: "none" } }}
-      />
-      <Tab.Screen
-        name="Parents"
-        component={ParentDashboard}
-        options={{ tabBarStyle: { display: "none" } }}
-      />
+      <Tab.Screen name="Drawing" component={DrawingScreen} options={{tabBarStyle:{display:"none"}}}/>
+      <Tab.Screen name="Chat" component={ChatbotScreen} options={{tabBarStyle:{display:"none"}}}/>
+      <Tab.Screen name="Parents" component={ParentDashboard} options={{tabBarStyle:{display:"none"}}}/>
     </Tab.Navigator>
   );
-};
+}
 
 const styles = StyleSheet.create({
   tabBar: {
     position: "absolute",
-    left: 20,
-    right: 20,
-    bottom: 15,
-    borderRadius: 30,
+    left: 0,
+    right: 0,
+    bottom: 0,
     backgroundColor: "#fff",
-    elevation: 5,
-    borderTopWidth: 0,
-  },
-  indicator: {
-    marginTop: 4,
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: COLORS.primary,
+    borderTopWidth: 0.5,
+    borderTopColor: "#e0e0e0",
+    elevation: 10,
   },
 });
-
-export default BottomNavigator;
-
- // Lets begin this journey again launch on november 11

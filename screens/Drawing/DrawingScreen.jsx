@@ -135,6 +135,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F6BD60",
     alignItems: "center",
     marginBottom: 15,
+    marginTop:30,
     elevation: 6,
   },
   headerText: {

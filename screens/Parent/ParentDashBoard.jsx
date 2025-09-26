@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
   // Header (Sticky)
   header: {
     paddingHorizontal: 20,
-    paddingTop: Platform.OS === "android" ? (StatusBar.currentHeight || 0) + 10 : 20,
+    paddingTop: 45,
     paddingBottom: 26,
     borderBottomLeftRadius: 28,
     borderBottomRightRadius: 28,

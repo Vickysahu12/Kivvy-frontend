@@ -29,7 +29,7 @@ const COLORS = {
 const { width } = Dimensions.get('window');
 
 const profileData = {
-  name: 'Misty',
+  name: 'Sweet💓',
   profilePic: mascooti,
 };
 
