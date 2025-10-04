@@ -113,17 +113,17 @@ const OnboardingScreen = ({ navigation }) => {
     ).start();
 
     // Handle hardware back button (Android)
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      Alert.alert(
-        'Exit Onboarding?',
-        'Are you sure you want to go back?',
-        [
-          { text: 'Cancel', style: 'cancel' },
-          { text: 'Yes', onPress: () => navigation.goBack() }
-        ]
-      );
-      return true;
-    });
+    // const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+    //   Alert.alert(
+    //     'Exit Onboarding?',
+    //     'Are you sure you want to go back?',
+    //     [
+    //       { text: 'Cancel', style: 'cancel' },
+    //       { text: 'Yes', onPress: () => navigation.goBack() }
+    //     ]
+    //   );
+    //   return true;
+    // });
 
     return () => {
       mounted = false;
@@ -139,7 +139,7 @@ const OnboardingScreen = ({ navigation }) => {
         console.log('Error removing TTS listeners:', error);
       }
       
-      backHandler.remove();
+      //backHandler.remove();
     };
   }, [cleanupAnimations, stopTTS, initializeTTS, navigation]);
 
