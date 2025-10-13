@@ -823,3 +823,7 @@ const styles = StyleSheet.create({
 });
 
 export default ParentDashboard;
+
+
+// Make sure the flow of my app and ensure that it should make child comfortable
+// and start the backend making and delete the authentication part
