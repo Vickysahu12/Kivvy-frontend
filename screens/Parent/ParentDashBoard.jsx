@@ -825,6 +825,3 @@ const styles = StyleSheet.create({
 export default ParentDashboard;
 
 
-// Make sure the flow of my app and ensure that it should make child comfortable
-// and start the backend making and delete the authentication part
-// common yarr vicky do your fucking work humko do app launch karna hai iss saaal 5saal mein 50crore ki company banana hai na dost to karna to pdega darling lets do it man karlenge yarr

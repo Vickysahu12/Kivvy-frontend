@@ -17,6 +17,7 @@ import mascooti from "../../assets/image/mascootii1.png";
 import reading from "../../assets/image/reading1.png";
 import drawing from "../../assets/image/drawing.png";
 import learn from "../../assets/image/learning.png";
+import bell from "../../assets/icon/bell.png"
 
 const COLORS = {
   primary: '#F6BD60',
@@ -268,7 +269,9 @@ export default function Dashboard({ navigation }) {
           accessibilityHint="Double tap to view notifications"
           accessibilityRole="button"
         >
-          <Text style={styles.notificationIcon}>🔔</Text>
+          <Image 
+          source={bell}
+          style={styles.notificationIcon}/>
         </TouchableOpacity>
       </View>
 
@@ -438,11 +441,13 @@ const styles = StyleSheet.create({
     color: COLORS.lightText 
   },
   
-  notificationIcon: { 
-    fontSize: 28, 
-    color: COLORS.highlight,
-    marginLeft: 10,
-  },
+  notificationIcon: {
+  width: 28,
+  height: 28,
+  tintColor: COLORS.highlight,
+  marginRight: 10,
+},
+
   
   sectionContainer: { 
     marginBottom: 20 
